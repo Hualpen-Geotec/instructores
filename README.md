@@ -1,4 +1,4 @@
-Portal de Instructores - Academia Minera Huelpén 
+Portal de Instructores - HUALPEN 
 
 CONTRATO GEOTEC
 
