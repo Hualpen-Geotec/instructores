@@ -2,56 +2,42 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Informe para Instructores</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-      text-align: center;
-    }
-    header {
-      background-color: #ffffff;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    header img.logo {
-      height: 60px;
-      margin: 10px;
-    }
-    header img.banner {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    h1 {
-      color: #ff5a00;
-      margin-top: 10px;
-    }
-    iframe {
-      border: none;
-      width: 100%;
-      height: 800px;
-      max-width: 100%;
-    }
-    @media (max-width: 600px) {
-      iframe {
-        height: 1000px;
-      }
-    }
-  </style>
+  <title>Instructores - Gestión y Reportes</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <img src="Logo Academia (002).png" alt="Hualpén Academia Logo" class="logo">
-    <img src="banner hualpen.png" alt="Banner Minero" class="banner">
-    <h1>Informe Académico</h1>
+    <img src="logo_academia.png" alt="Logo" class="logo">
+    <h1>Portal de Instructores</h1>
   </header>
 
-  <iframe src="https://script.google.com/macros/s/AKfycbxoMJWpb5PM-VFlbXh9mG0t21SgUPVbGRRXtaylA5BUS3muis3nzAGcRMxzdskCj_Pj/exec">
-    Tu navegador no soporta iframes. Por favor, accede directamente al informe.
-  </iframe>
+  <main id="login-section">
+    <h2>Acceso de Instructores</h2>
+    <input type="text" id="rutInput" placeholder="Ingrese su RUT">
+    <button onclick="validarInstructor()">Ingresar</button>
+    <p id="mensajeLogin"></p>
+  </main>
+
+  <section id="contenido" style="display:none;">
+    <h2 id="bienvenida"></h2>
+
+    <h3>Solicitudes Pendientes</h3>
+    <div id="tablaSolicitudes"></div>
+
+    <h3>Informe Personal</h3>
+    <div id="informePersonal"></div>
+
+    <h3>Buscar Alumno</h3>
+    <input type="text" id="buscarRut" placeholder="Ingrese RUT del alumno">
+    <button onclick="buscarAlumno()">Buscar</button>
+    <div id="informeAlumno"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 Academia Minera - Todos los derechos reservados</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
