@@ -2,42 +2,73 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Instructores - Gestión y Reportes</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Panel de Instructores</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbyfKXv1_i4mxhJ5Ea_ZYhqrynee8cMD2J975frMHfWsYho7KaM8tzccyxWstrLNky5iGg/exec";
+  </script>
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
-    <img src="logo academia (002).png" alt="Logo" class="logo">
-    <h1>Portal de Instructores</h1>
-  </header>
+  <div class="container">
+    <header>
+      <img src="Logo Academia (002).png" alt="Logo" class="logo">
+      <h1>Panel de Gestión de Instructores</h1>
+    </header>
 
-  <main id="login-section">
-    <h2>Acceso de Instructores</h2>
-    <input type="text" id="rutInput" placeholder="Ingrese su RUT">
-    <button onclick="validarInstructor()">Ingresar</button>
-    <p id="mensajeLogin"></p>
-  </main>
+    <section id="login-section">
+      <h2>Ingrese su RUT</h2>
+      <input type="text" id="rutInput" placeholder="Ej: 12.345.678-9">
+      <button id="loginBtn">Ingresar</button>
+      <p id="loginError" class="error"></p>
+    </section>
 
-  <section id="contenido" style="display:none;">
-    <h2 id="bienvenida"></h2>
+    <section id="main-section" style="display: none;">
+      <h2>Bienvenido, <span id="instructorName"></span></h2>
 
-    <h3>Solicitudes Pendientes</h3>
-    <div id="tablaSolicitudes"></div>
+      <div id="solicitudes-container">
+        <h3>Solicitudes Pendientes</h3>
+        <table id="solicitudesTable">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>RUT</th>
+              <th>Correo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí se llenan dinámicamente las solicitudes -->
+          </tbody>
+        </table>
+      </div>
 
-    <h3>Informe Personal</h3>
-    <div id="informePersonal"></div>
+      <div id="informe-container">
+        <h3>Informe Personal</h3>
+        <div id="infoResumen">
+          <p><strong>Veces ingresado:</strong> <span id="vecesIngresado"></span></p>
+          <p><strong>Puntaje máximo:</strong> <span id="puntajeMaximo"></span></p>
+          <p><strong>Primer intento:</strong> <span id="primerIntento"></span></p>
+          <p><strong>Último intento:</strong> <span id="ultimoIntento"></span></p>
+        </div>
+        <canvas id="graficoEvolucion" width="400" height="200"></canvas>
+      </div>
 
-    <h3>Buscar Alumno</h3>
-    <input type="text" id="buscarRut" placeholder="Ingrese RUT del alumno">
-    <button onclick="buscarAlumno()">Buscar</button>
-    <div id="informeAlumno"></div>
-  </section>
+      <div id="busqueda-container">
+        <h3>Buscar Alumno</h3>
+        <input type="text" id="busquedaInput" placeholder="Nombre, Apellido o RUT">
+        <button id="buscarBtn">Buscar</button>
 
-  <footer>
-    <p>© 2025 Academia Minera - Todos los derechos reservados</p>
-  </footer>
+        <div id="resultadosBusqueda" style="margin-top:20px;">
+          <!-- Aquí se mostrará la lista de resultados -->
+        </div>
+      </div>
 
-  <script src="script.js"></script>
+    </section>
+
+    <footer>
+      <p>© 2025 Academia Minera - Todos los derechos reservados</p>
+    </footer>
+  </div>
 </body>
 </html>
