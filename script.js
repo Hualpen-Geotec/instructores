@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwqSitqZQ4ylWUAqI2SC3E14t0NfFgtEIKCkETuIbdT275id5oi0THT7x8vOGQTW_-8/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzT_1l2b7OPCsSj8JDfOUL6QKd2URY-I9ehcB1-LWnS0mPku4tijrur6ggTX5cHr1u0/exec";
 let rutInstructor = "";
 
 function validarAcceso() {
@@ -8,26 +8,33 @@ function validarAcceso() {
   fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: "validarAccesoInforme", rut: rut })
+    body: JSON.stringify({ action: "validarAccesoInforme", rut })
   })
     .then(res => res.json())
     .then(data => {
       if (data.autorizado) {
-        // continuar...
+        rutInstructor = rut;
+        document.getElementById("login").style.display = "none";
+        document.getElementById("panel").style.display = "block";
+        document.getElementById("bienvenida").innerText = "Bienvenido, " + data.nombre;
+        cargarInforme();
       } else {
         mostrarError("RUT no autorizado.");
       }
     })
-    .catch(err => mostrarError("Error al contactar el servidor."));
+    .catch(() => mostrarError("Error de conexión con el servidor."));
 }
-
 
 function mostrarError(msg) {
   document.getElementById("mensaje-error").innerText = msg;
 }
 
 function cargarInforme() {
-  fetch(`${API_URL}?action=obtenerInforme&rut=${rutInstructor}`)
+  fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "obtenerInforme", rut: rutInstructor })
+  })
     .then(res => res.json())
     .then(data => {
       if (!data) return;
