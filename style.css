@@ -1,87 +1,49 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f8f5f0;
+  background-color: #f8f5ef;
   margin: 0;
   padding: 0;
 }
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-
 header {
   text-align: center;
-  margin-bottom: 20px;
+  background-color: #fff3cd;
+  padding: 20px;
 }
-
-.logo {
-  width: 100px;
+main {
+  padding: 20px;
 }
-
-h1, h2, h3 {
-  color: #3b3b3b;
+input, button {
+  padding: 10px;
+  font-size: 1em;
 }
-
-section {
-  margin-bottom: 40px;
-}
-
-input[type="text"] {
-  width: 250px;
-  padding: 8px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
 button {
-  padding: 10px 20px;
-  background-color: #d4af37; /* Dorado arena */
+  background-color: #d4a74f;
   border: none;
   color: white;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
 }
-
 button:hover {
-  background-color: #b8932c;
+  background-color: #b3863b;
 }
-
-.error {
+#mensaje-error {
   color: red;
-  margin-top: 10px;
 }
-
-#solicitudesTable, #resultadosBusqueda {
-  width: 100%;
+.info-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 20px;
 }
-
-#solicitudesTable th, #solicitudesTable td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.card {
+  flex: 1;
+  min-width: 140px;
+  padding: 15px;
+  background-color: white;
+  border-left: 5px solid #d4a74f;
+  box-shadow: 0 0 5px #ccc;
 }
-
-#solicitudesTable th {
-  background-color: #f2e9dc;
-}
-
-.resultado-alumno {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
-
-footer {
-  text-align: center;
-  margin-top: 40px;
-  font-size: 14px;
-  color: #777;
+canvas {
+  margin-top: 30px;
+  max-width: 100%;
 }

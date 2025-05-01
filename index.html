@@ -1,31 +1,36 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Gestión de Instructores - Hualpén</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <title>Informe Académico - Hualpén</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script defer src="script.js"></script>
 </head>
 <body>
   <header>
-    <img src="Logo Academia (002).png" class="logo" alt="Logo">
-    <img src="banner hualpen.png" class="banner" alt="Banner">
-    <h1>Panel de Instructores</h1>
+    <h1>Informe Académico del Instructor</h1>
   </header>
+
   <main>
-    <section id="login-section">
+    <section id="login">
+      <h2>Acceso Instructor</h2>
       <input type="text" id="rut" placeholder="Ingresa tu RUT">
       <button onclick="validarAcceso()">Ingresar</button>
-      <p id="error-rut"></p>
+      <p id="mensaje-error"></p>
     </section>
-    <section id="panel-instructor" style="display:none;">
+
+    <section id="panel" style="display:none;">
       <h2 id="bienvenida"></h2>
-      <div id="solicitudes"></div>
-      <h3>Mi Informe Personal</h3>
-      <div id="informe"></div>
+      <div class="info-boxes">
+        <div class="card"><h3>Intentos</h3><p id="intentos"></p></div>
+        <div class="card"><h3>Puntaje Máximo</h3><p id="maximo"></p></div>
+        <div class="card"><h3>Promedio</h3><p id="promedio"></p></div>
+        <div class="card"><h3>Primera vez</h3><p id="inicio"></p></div>
+        <div class="card"><h3>Última vez</h3><p id="ultimo"></p></div>
+      </div>
+      <h3>Evolución de Puntajes</h3>
       <canvas id="grafico"></canvas>
     </section>
   </main>
