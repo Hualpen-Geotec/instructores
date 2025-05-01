@@ -5,20 +5,22 @@ function validarAcceso() {
   const rut = document.getElementById("rut").value.trim();
   if (!rut) return mostrarError("Por favor ingresa tu RUT.");
 
-  fetch(`${API_URL}?action=validarAccesoInforme&rut=${rut}`)
+  fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "validarAccesoInforme", rut: rut })
+  })
     .then(res => res.json())
     .then(data => {
       if (data.autorizado) {
-        rutInstructor = rut;
-        document.getElementById("login").style.display = "none";
-        document.getElementById("panel").style.display = "block";
-        document.getElementById("bienvenida").innerText = "Bienvenido, " + data.nombre;
-        cargarInforme();
+        // continuar...
       } else {
         mostrarError("RUT no autorizado.");
       }
-    });
+    })
+    .catch(err => mostrarError("Error al contactar el servidor."));
 }
+
 
 function mostrarError(msg) {
   document.getElementById("mensaje-error").innerText = msg;
