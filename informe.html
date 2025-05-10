@@ -1,68 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Informe Instructores</title>
-  <link rel="stylesheet" href="style.css?v=1.0" />
+  <title>Informe Instructor</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    .pagina-informe {
-      page-break-after: always;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      margin-top: 40px;
-      background-color: white;
-    }
-
-    .logo {
-      max-height: 60px;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-
-    .botones {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-      .pagina-informe, .pagina-informe * {
-        visibility: visible;
-      }
-      .pagina-informe {
-        position: absolute;
-        left: 0;
-        top: 0;
-      }
-    }
-  </style>
 </head>
 <body>
   <div class="container">
-    <img src="Logo Academia (002).png" alt="Logo Academia" class="logo" />
-
-    <h1>Informe por Participante</h1>
-
-    <label for="selectorRuts">Selecciona uno o más usuarios:</label>
-    <select id="selectorRuts" multiple size="6" style="width: 100%; margin-top: 10px;"></select>
-
-    <div class="botones">
-      <button id="generarInforme">Generar Informe</button>
-      <button onclick="window.print()">Imprimir o Exportar a PDF</button>
-    </div>
-
-    <div id="informesContainer"></div>
+    <img src="Logo Academia (002).png" alt="Logo Academia" style="max-height: 60px; float: left;">
+    <h1 style="text-align: center;">Informe Personalizado</h1>
+    <label for="selectorRuts"><strong>Selecciona uno o más usuarios:</strong></label>
+    <select id="selectorRuts" multiple style="width: 100%; margin-bottom: 10px;"></select>
+    <button id="generarInforme">Generar informe</button>
+    <div id="informesContainer" class="pagina-informe"></div>
   </div>
-
-  <script src="informe.js?v=2.0"></script>
+  <script src="informe.js"></script>
 </body>
 </html>
