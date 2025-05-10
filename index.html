@@ -20,7 +20,7 @@
   </div>
 
   <script>
-    const LOGIN_URL = "https://script.google.com/macros/s/AKfycbzvjsK77j6Fm3j3fcNsSWQwWf9F8ZLwuZzJ4IrkumTzSKLSJskOxfUc_OzlfgNii2FG5g/exec"; // Usamos el validador existente
+    const LOGIN_URL = "https://script.google.com/macros/s/AKfycbwiZy2sj0UupFMis3UCSHc72bj9Jj5Xje82IDopOxBT-2xxE0RbplnMrRWho9IVu1SI/exec";
 
     document.getElementById("loginForm").addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -34,7 +34,7 @@
       }
 
       try {
-        const res = await fetch(`${LOGIN_URL}?rut=${rut}&tipo=instructor`);
+        const res = await fetch(`${LOGIN_URL}?rut=${rut}`);
         const data = await res.json();
 
         if (data.autorizado) {
