@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
 
   if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
+    loginForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       const rut = document.getElementById("rut").value.trim();
       const mensaje = document.getElementById("mensaje");
@@ -15,16 +15,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Validación mediante imagen invisible (evita CORS)
-      const img = new Image();
-      img.onload = () => {
-        localStorage.setItem("rut_instructor", rut);
-        window.location.href = "informe.html";
-      };
-      img.onerror = () => {
-        mensaje.textContent = "Acceso denegado. No está autorizado.";
-      };
-      img.src = `${LOGIN_URL}?rut=${rut}&t=${Date.now()}`; // Agrega t para evitar caché
+      try {
+        const res = await fetch(`${LOGIN_URL}?rut=${rut}&t=${Date.now()}`);
+        const text = await res.text();
+
+        if (text.trim() === "OK") {
+          localStorage.setItem("rut_instructor", rut);
+          window.location.href = "informe.html";
+        } else {
+          mensaje.textContent = "Acceso denegado. No está autorizado.";
+        }
+      } catch (error) {
+        console.error("Error de conexión:", error);
+        mensaje.textContent = "Error al validar el RUT. Intenta más tarde.";
+      }
     });
   }
 });
