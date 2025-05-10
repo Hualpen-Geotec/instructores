@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe Instructor</title>
+  <link rel="stylesheet" href="style.css?v=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Informe Personalizado</h1>
+    <p><strong>RUT:</strong> <span id="rutUsuario"></span></p>
+    <p><strong>Total intentos:</strong> <span id="totalIntentos"></span></p>
+    <p><strong>Primera vez:</strong> <span id="primeraVez"></span></p>
+    <p><strong>Última vez:</strong> <span id="ultimaVez"></span></p>
+    <p><strong>Nota más baja:</strong> <span id="notaMin"></span></p>
+    <p><strong>Nota más alta:</strong> <span id="notaMax"></span></p>
+    <p><strong>Promedio:</strong> <span id="promedioNota"></span></p>
+
+    <h2>Progreso de notas</h2>
+    <canvas id="graficoProgreso" height="200"></canvas>
+
+    <h2>Errores por fuente</h2>
+    <canvas id="graficoErrores" height="200"></canvas>
+  </div>
+
+  <script src="informe.js?v=1.0"></script>
+</body>
+</html>
