@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Informe Académico</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceso Instructores</title>
+  <link rel="stylesheet" href="style.css?v=1.0" />
 </head>
 <body>
-  <header>
-    <h1>Informe Académico del Instructor</h1>
-  </header>
+  <div class="container">
+    <h1>Ingreso Instructores</h1>
 
-  <main>
-    <section id="login">
-      <h2>Acceso</h2>
-      <input type="text" id="rut" placeholder="Ingresa tu RUT">
-      <button onclick="validarAcceso()">Ingresar</button>
-      <p id="mensaje-error"></p>
-    </section>
+    <form id="loginForm">
+      <label for="rut">Ingrese su RUT (sin puntos ni guion):</label>
+      <input type="text" id="rut" name="rut" placeholder="123456789" maxlength="9" required />
 
-    <section id="panel" style="display:none;">
-      <h2 id="bienvenida"></h2>
-      <div class="info-boxes">
-        <div class="card"><h3>Intentos</h3><p id="intentos"></p></div>
-        <div class="card"><h3>Puntaje Máximo</h3><p id="maximo"></p></div>
-        <div class="card"><h3>Promedio</h3><p id="promedio"></p></div>
-        <div class="card"><h3>Primera vez</h3><p id="inicio"></p></div>
-        <div class="card"><h3>Última vez</h3><p id="ultimo"></p></div>
-      </div>
-      <h3>Evolución de Puntajes</h3>
-      <canvas id="grafico"></canvas>
-    </section>
-  </main>
+      <button type="submit">Entrar</button>
+      <p id="mensaje" class="mensaje-error"></p>
+    </form>
+  </div>
+
+  <script>
+    const LOGIN_URL = "https://script.google.com/macros/s/AKfycbzvjsK77j6Fm3j3fcNsSWQwWf9F8ZLwuZzJ4IrkumTzSKLSJskOxfUc_OzlfgNii2FG5g/exec"; // Usamos el validador existente
+
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const rut = document.getElementById("rut").value.trim();
+      const mensaje = document.getElementById("mensaje");
+      mensaje.textContent = "";
+
+      if (rut.length < 7) {
+        mensaje.textContent = "RUT inválido. Intente nuevamente.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${LOGIN_URL}?rut=${rut}&tipo=instructor`);
+        const data = await res.json();
+
+        if (data.autorizado) {
+          localStorage.setItem("rut_instructor", rut);
+          window.location.href = "informe.html";
+        } else {
+          mensaje.textContent = "Acceso denegado. No está autorizado.";
+        }
+      } catch (error) {
+        mensaje.textContent = "Error de conexión. Intente más tarde.";
+      }
+    });
+  </script>
 </body>
 </html>
