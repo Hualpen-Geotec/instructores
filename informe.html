@@ -1,31 +1,68 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Informe Instructor</title>
+  <title>Informe Instructores</title>
   <link rel="stylesheet" href="style.css?v=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .pagina-informe {
+      page-break-after: always;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-top: 40px;
+      background-color: white;
+    }
+
+    .logo {
+      max-height: 60px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .botones {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      .pagina-informe, .pagina-informe * {
+        visibility: visible;
+      }
+      .pagina-informe {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Informe Personalizado</h1>
-    <p><strong>RUT:</strong> <span id="rutUsuario"></span></p>
-    <p><strong>Total intentos:</strong> <span id="totalIntentos"></span></p>
-    <p><strong>Primera vez:</strong> <span id="primeraVez"></span></p>
-    <p><strong>Última vez:</strong> <span id="ultimaVez"></span></p>
-    <p><strong>Nota más baja:</strong> <span id="notaMin"></span></p>
-    <p><strong>Nota más alta:</strong> <span id="notaMax"></span></p>
-    <p><strong>Promedio:</strong> <span id="promedioNota"></span></p>
+    <img src="Logo Academia (002).png" alt="Logo Academia" class="logo" />
 
-    <h2>Progreso de notas</h2>
-    <canvas id="graficoProgreso" height="200"></canvas>
+    <h1>Informe por Participante</h1>
 
-    <h2>Errores por fuente</h2>
-    <canvas id="graficoErrores" height="200"></canvas>
+    <label for="selectorRuts">Selecciona uno o más usuarios:</label>
+    <select id="selectorRuts" multiple size="6" style="width: 100%; margin-top: 10px;"></select>
+
+    <div class="botones">
+      <button id="generarInforme">Generar Informe</button>
+      <button onclick="window.print()">Imprimir o Exportar a PDF</button>
+    </div>
+
+    <div id="informesContainer"></div>
   </div>
 
-  <script src="informe.js?v=1.0"></script>
+  <script src="informe.js?v=2.0"></script>
 </body>
 </html>
