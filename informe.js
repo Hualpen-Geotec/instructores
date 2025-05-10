@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // Obtener RUTs únicos con nombres asociados
+  // Crear lista de usuarios únicos
   const usuarios = {};
   datos.forEach(row => {
-    const nombre = row["Nombre"];
+    const nombre = row["NOMBRE"];
     const rut = row["RUT"];
     if (nombre && rut && !usuarios[rut]) {
       usuarios[rut] = nombre;
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   document.getElementById("generarInforme").addEventListener("click", () => {
-    contenedor.innerHTML = ""; // Limpiar anteriores
+    contenedor.innerHTML = "";
     const seleccionados = Array.from(selector.selectedOptions).map(opt => opt.value);
     const resumenGlobal = {
       totalIntentos: 0,
@@ -47,13 +47,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       const registros = datos.filter(d => d.RUT === rut);
       if (registros.length === 0) return;
 
-      const nombre = registros[0].Nombre;
-      const notas = registros.map(r => Number(r["Nota (%)"]));
-      const fechas = registros.map(r => new Date(r.Fecha));
-      const fuentes = ["EPF", "CGR", "EXTINTORES", "ENERGIAS", "EXP_MINERA", "OP_INV", "REG_INT_TRANS", "REG_CARGIO", "PROC_CONDUC_INT_MINA"];
+      const nombre = registros[0]["NOMBRE"];
+      const notas = registros.map(r => Number(r["NOTA"] || 0));
+      const fechas = registros.map(r => new Date(r["FECHA"]));
+      const fuentes = [
+        "EPF", "CGR", "EXTINTORES", "ENERGIAS", "EXP_MINERA",
+        "OP_INV", "REG_INT_TRANS", "REG_CARGIO", "PROC_CONDUC_INT_MINA"
+      ];
       const errores = {};
-
       fuentes.forEach(f => errores[f] = 0);
+
       registros.forEach(r => {
         fuentes.forEach(f => {
           errores[f] += Number(r[f] || 0);
@@ -61,6 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       });
 
+      // Crear informe individual
       const div = document.createElement("div");
       div.className = "pagina-informe";
       div.innerHTML = `
@@ -76,11 +80,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
       contenedor.appendChild(div);
 
-      // Graficar notas
+      // Gráfico de progreso de notas
       new Chart(document.getElementById("grafNota" + rut), {
         type: "line",
         data: {
-          labels: registros.map(r => r.Fecha),
+          labels: registros.map(r => r["FECHA"]),
           datasets: [{
             label: "Nota (%)",
             data: notas,
@@ -94,7 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
 
-      // Graficar errores
+      // Gráfico de errores por fuente
       new Chart(document.getElementById("grafErrores" + rut), {
         type: "bar",
         data: {
@@ -111,14 +115,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
 
-      // Actualizar resumen global
+      // Acumulado global
       resumenGlobal.totalIntentos += registros.length;
       resumenGlobal.sumaNotas += notas.reduce((a, b) => a + b, 0);
       resumenGlobal.notaMin = Math.min(resumenGlobal.notaMin, ...notas);
       resumenGlobal.notaMax = Math.max(resumenGlobal.notaMax, ...notas);
     });
 
-    // Agregar resumen global si hay más de un usuario
+    // Mostrar resumen general si hay más de uno seleccionado
     if (seleccionados.length > 1) {
       const div = document.createElement("div");
       div.className = "pagina-informe";
