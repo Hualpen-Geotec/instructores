@@ -1,4 +1,3 @@
-
 const BDATOS_URL = "bdatos.csv";
 
 function parseCSV(text) {
@@ -15,17 +14,31 @@ function parseCSV(text) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const selector = document.getElementById("selectorRuts");
-  const contenedor = document.getElementById("informesContainer");
+  const selector = document.createElement("select");
+  selector.id = "selectorRuts";
+  selector.multiple = true;
+  selector.style.width = "100%";
+  document.getElementById("informe").prepend(selector);
+
+  const boton = document.createElement("button");
+  boton.id = "generarInforme";
+  boton.textContent = "Generar Informe";
+  document.getElementById("informe").prepend(boton);
+
+  const contenedor = document.createElement("div");
+  contenedor.id = "informesContainer";
+  document.getElementById("informe").appendChild(contenedor);
 
   let datos = [];
 
   try {
     const res = await fetch(BDATOS_URL);
+    if (!res.ok) throw new Error("No se pudo cargar CSV");
     const text = await res.text();
     datos = parseCSV(text);
   } catch (error) {
     alert("Error al cargar el archivo CSV.");
+    console.error(error);
     return;
   }
 
@@ -45,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     selector.appendChild(option);
   }
 
-  document.getElementById("generarInforme").addEventListener("click", () => {
+  boton.addEventListener("click", () => {
     contenedor.innerHTML = "";
     const seleccionados = Array.from(selector.selectedOptions).map(opt => opt.value);
     const resumenGlobal = {
@@ -72,8 +85,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       registros.forEach(r => {
         fuentes.forEach(f => {
-          errores[f] += Number(r[f] || 0);
-          resumenGlobal.erroresPorFuente[f] = (resumenGlobal.erroresPorFuente[f] || 0) + Number(r[f] || 0);
+          const val = Number(r[f] || 0);
+          errores[f] += val;
+          resumenGlobal.erroresPorFuente[f] = (resumenGlobal.erroresPorFuente[f] || 0) + val;
         });
       });
 
@@ -99,13 +113,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           datasets: [{
             label: "Nota (%)",
             data: notas,
-            borderColor: "blue",
-            fill: false
+            borderColor: "#8ecae6",
+            backgroundColor: "rgba(142, 202, 230, 0.2)",
+            tension: 0.3
           }]
         },
         options: {
           responsive: true,
-          plugins: { legend: { display: false } }
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 100 }
+          }
         }
       });
 
@@ -116,7 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           datasets: [{
             label: "Errores",
             data: fuentes.map(f => errores[f]),
-            backgroundColor: "tomato"
+            backgroundColor: "#f7a072"
           }]
         },
         options: {
@@ -151,7 +169,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           datasets: [{
             label: "Errores totales",
             data: Object.values(resumenGlobal.erroresPorFuente),
-            backgroundColor: "orange"
+            backgroundColor: "#f9c74f"
           }]
         },
         options: {
