@@ -1,25 +1,37 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Acceso exclusivo para instructores autorizados del sistema académico Hualpén Geotec.">
+  <meta name="author" content="Hualpén Geotec">
   <title>Acceso Instructores</title>
   <link rel="stylesheet" href="style.css?v=1.0" />
 </head>
 <body>
-  <div class="container">
-    <h1>Ingreso Instructores</h1>
+  <header>
+    <h1>Ingreso de Instructores</h1>
+  </header>
 
-    <form id="loginForm">
-      <label for="rut">Ingrese su RUT (sin puntos ni guion):</label>
-      <input type="text" id="rut" name="rut" placeholder="123456789" maxlength="9" required />
+  <main class="container" role="main">
+    <form id="loginForm" aria-label="Formulario de acceso">
+      <label for="rut">Ingrese su RUT <small>(sin puntos ni guion)</small>:</label>
+      <input
+        type="text"
+        id="rut"
+        name="rut"
+        placeholder="123456789"
+        maxlength="9"
+        required
+        autocomplete="off"
+        aria-required="true"
+      />
 
-      <button type="submit">Entrar</button>
-      <p id="mensaje" class="mensaje-error"></p>
+      <button type="submit" aria-label="Entrar al sistema">Entrar</button>
+      <p id="mensaje" class="mensaje-error" role="alert" aria-live="assertive"></p>
     </form>
-  </div>
+  </main>
 
-  <script src="script.js?v=1.0"></script>
+  <script src="script.js?v=1.0" defer></script>
 </body>
 </html>
