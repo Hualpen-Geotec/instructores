@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Acceso exclusivo para instructores autorizados del sistema académico Hualpén Geotec.">
-  <meta name="author" content="Hualpén Geotec">
-  <title>Acceso Instructores</title>
-  <link rel="stylesheet" href="style.css?v=1.0" />
+  <title>Acceso Instructores - Hualpén Academia</title>
+  <link rel="stylesheet" href="style.css?v=1.1" />
 </head>
 <body>
+
   <header>
-    <h1>Ingreso de Instructores</h1>
+    <img src="Logo_Academia.png" alt="Logo Hualpén Academia">
   </header>
 
-  <main class="container" role="main">
-    <form id="loginForm" aria-label="Formulario de acceso">
+  <main class="container">
+    <h1>Ingreso de Instructores</h1>
+
+    <form id="loginForm" aria-label="Formulario de ingreso">
       <label for="rut">Ingrese su RUT <small>(sin puntos ni guion)</small>:</label>
       <input
         type="text"
@@ -27,11 +28,15 @@
         aria-required="true"
       />
 
-      <button type="submit" aria-label="Entrar al sistema">Entrar</button>
+      <button type="submit">Entrar</button>
       <p id="mensaje" class="mensaje-error" role="alert" aria-live="assertive"></p>
     </form>
   </main>
 
-  <script src="script.js?v=1.0" defer></script>
+  <footer>
+    &copy; 2025 Hualpén Academia - Todos los derechos reservados.
+  </footer>
+
+  <script src="script.js?v=1.1" defer></script>
 </body>
 </html>
