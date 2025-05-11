@@ -1,90 +1,96 @@
-/* Tipografía base */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
-  padding: 10px;
-  line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fefefe;
+  padding: 0;
+  margin: 0;
   color: #333;
 }
 
+header {
+  background-image: url('banner.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header img {
+  max-height: 120px;
+}
+
 .container {
-  max-width: 900px;
-  margin: auto;
-  background: #fff;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 960px;
+  margin: 30px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: #fffaf5;
 }
 
-/* Encabezados */
 h1, h2 {
-  color: #2c3e50;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  margin-bottom: 1rem;
+  color: #4e4e4e;
+  text-align: center;
 }
 
-/* Botones */
 button {
   margin-top: 10px;
-  padding: 10px 24px;
-  background-color: #b87333; /* Cobre */
+  padding: 12px 24px;
+  background-color: #f7a072;
   color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #a1551a;
-  transform: scale(1.03);
+  background-color: #f58a5e;
+  transform: scale(1.05);
 }
 
 button:focus-visible {
-  outline: 3px solid #b87333;
-  outline-offset: 2px;
+  outline: 3px solid #f7a072;
 }
 
-/* Inputs */
 input, select {
   width: 100%;
   padding: 12px;
   font-size: 1rem;
   margin-top: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fcfcfc;
   transition: border 0.2s ease;
 }
 
 input:focus, select:focus {
-  border-color: #b87333;
+  border-color: #f7a072;
   outline: none;
 }
 
-/* Mensaje de error */
 .mensaje-error {
   color: #c0392b;
   font-weight: bold;
   margin-top: 8px;
+  text-align: center;
 }
 
-/* Informe PDF */
-.pagina-informe {
-  page-break-after: always;
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  color: #aaa;
   margin-top: 40px;
+  padding-bottom: 20px;
 }
 
-canvas {
-  max-width: 100%;
-  margin-top: 20px;
-}
-
-/* Responsive: móviles */
 @media (max-width: 600px) {
   .container {
-    padding: 15px;
+    padding: 20px;
   }
 
   h1, h2 {
@@ -93,5 +99,13 @@ canvas {
 
   button {
     width: 100%;
+  }
+
+  header {
+    height: 150px;
+  }
+
+  header img {
+    max-height: 90px;
   }
 }
