@@ -1,12 +1,11 @@
-// URL del archivo CSV de instructores en GitHub
-const CSV_URL = "https://raw.githubusercontent.com/Hualpen-Geotec/instructores/main/instructores.csv";
+const LOGIN_URL = "https://script.google.com/macros/s/AKfycbwJMqJt9e5Th-9BSS8YlXvlpQGkqovlJY-esGeShTKhroLfT-xibzQlaQMZj0m7XHLV/exec";
 
-// Función para limpiar el RUT (eliminar puntos y guiones)
+// Limpia el RUT (quita puntos y guión)
 function limpiarRUT(rut) {
   return rut.replace(/[^0-9kK]/g, "").toUpperCase();
 }
 
-// Función para validar el RUT chileno
+// Valida el RUT chileno (con dígito verificador)
 function validarRUT(rut) {
   if (!/^\d{7,8}[0-9K]$/.test(rut)) return false;
 
@@ -26,28 +25,7 @@ function validarRUT(rut) {
   return dv === dvCalculado;
 }
 
-// Función para cargar y parsear el CSV de instructores
-async function cargarInstructores() {
-  try {
-    const response = await fetch(CSV_URL);
-    const texto = await response.text();
-    const lineas = texto.trim().split("\n");
-    const instructores = new Map();
-
-    for (const linea of lineas) {
-      const [rut, nombre] = linea.split(",").map(campo => campo.trim());
-      if (rut && nombre) {
-        instructores.set(limpiarRUT(rut), nombre);
-      }
-    }
-
-    return instructores;
-  } catch (error) {
-    console.error("Error al cargar el archivo CSV:", error);
-    return null;
-  }
-}
-
+// Al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
 
@@ -57,29 +35,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const rutInput = document.getElementById("rut");
       const mensaje = document.getElementById("mensaje");
-      const rutIngresado = limpiarRUT(rutInput.value.trim());
+      const rut = limpiarRUT(rutInput.value.trim());
 
       mensaje.textContent = "";
 
-      if (!validarRUT(rutIngresado)) {
+      if (!validarRUT(rut)) {
         mensaje.textContent = "RUT inválido. Verifique el formato.";
         return;
       }
 
       mensaje.textContent = "Validando...";
 
-      const instructores = await cargarInstructores();
+      try {
+        const res = await fetch(`${LOGIN_URL}?rut=${encodeURIComponent(rut)}`);
+        const text = (await res.text()).trim();
 
-      if (!instructores) {
-        mensaje.textContent = "Error al cargar la lista de instructores. Intente más tarde.";
-        return;
-      }
-
-      if (instructores.has(rutIngresado)) {
-        localStorage.setItem("rut_instructor", rutIngresado);
-        window.location.href = "informe.html";
-      } else {
-        mensaje.textContent = "Acceso denegado. No está autorizado.";
+        if (text === "OK") {
+          localStorage.setItem("rut_instructor", rut);
+          window.location.href = "informe.html";
+        } else {
+          mensaje.textContent = "Acceso denegado. RUT no autorizado.";
+        }
+      } catch (error) {
+        console.error("Error al validar:", error);
+        mensaje.textContent = "Error al validar. Intente más tarde.";
       }
     });
   }
