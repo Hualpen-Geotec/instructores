@@ -1,3 +1,4 @@
+/* Tipografía base */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #fefefe;
@@ -6,10 +7,12 @@ body {
   color: #333;
 }
 
+/* Banner superior con imagen alineada desde abajo */
 header {
   background-image: url('banner.png');
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-position: bottom center; /* Alineación desde abajo */
   height: 200px;
   display: flex;
   align-items: center;
@@ -20,6 +23,7 @@ header img {
   max-height: 120px;
 }
 
+/* Contenedor principal */
 .container {
   max-width: 960px;
   margin: 30px auto;
@@ -30,11 +34,15 @@ header img {
   background-color: #fffaf5;
 }
 
+/* Títulos */
 h1, h2 {
   color: #4e4e4e;
   text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 1rem;
 }
 
+/* Botones */
 button {
   margin-top: 10px;
   padding: 12px 24px;
@@ -56,6 +64,7 @@ button:focus-visible {
   outline: 3px solid #f7a072;
 }
 
+/* Inputs */
 input, select {
   width: 100%;
   padding: 12px;
@@ -73,6 +82,7 @@ input:focus, select:focus {
   outline: none;
 }
 
+/* Mensajes de error */
 .mensaje-error {
   color: #c0392b;
   font-weight: bold;
@@ -80,6 +90,18 @@ input:focus, select:focus {
   text-align: center;
 }
 
+/* Página de informe con salto para PDF */
+.pagina-informe {
+  page-break-after: always;
+  margin-top: 40px;
+}
+
+canvas {
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+/* Pie de página */
 footer {
   text-align: center;
   font-size: 0.9em;
@@ -88,6 +110,7 @@ footer {
   padding-bottom: 20px;
 }
 
+/* Responsive para móviles */
 @media (max-width: 600px) {
   .container {
     padding: 20px;
@@ -102,7 +125,8 @@ footer {
   }
 
   header {
-    height: 150px;
+    height: 160px;
+    background-position: bottom center;
   }
 
   header img {
