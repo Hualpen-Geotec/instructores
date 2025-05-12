@@ -1,11 +1,11 @@
 const LOGIN_URL = "https://script.google.com/macros/s/AKfycbwJMqJt9e5Th-9BSS8YlXvlpQGkqovlJY-esGeShTKhroLfT-xibzQlaQMZj0m7XHLV/exec";
 
-// Limpia el RUT (quita puntos y guión)
+// Limpia puntos, guion y convierte a mayúscula
 function limpiarRUT(rut) {
   return rut.replace(/[^0-9kK]/g, "").toUpperCase();
 }
 
-// Valida el RUT chileno (con dígito verificador)
+// Valida dígito verificador chileno
 function validarRUT(rut) {
   if (!/^\d{7,8}[0-9K]$/.test(rut)) return false;
 
@@ -25,7 +25,7 @@ function validarRUT(rut) {
   return dv === dvCalculado;
 }
 
-// Al cargar la página
+// Evento al cargar
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
 
