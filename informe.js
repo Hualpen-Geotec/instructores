@@ -1,3 +1,4 @@
+
 const RESULTADOS_URL = "https://script.google.com/macros/s/AKfycbxzGpfD9KSrarirQrn14A08sNZlq0S7wYhacSPZRWv0eDKVXTpm0l-yh_YBuy-kMfwwhQ/exec";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -5,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const selector = document.getElementById("selectorRuts");
 
   try {
+    // Cargar listado de alumnos únicos
     const res = await fetch(`${RESULTADOS_URL}?listado=1`);
     const lista = await res.json();
 
