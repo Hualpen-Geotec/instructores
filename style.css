@@ -12,15 +12,17 @@ header {
   background-image: url('banner.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: bottom center; /* Alineación desde abajo */
+  background-position: bottom center;
   height: 200px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-start; /* Alinea a la izquierda */
+  padding: 0 30px 20px;
 }
 
 header img {
-  max-height: 120px;
+  max-height: 100px;
+  object-fit: contain;
 }
 
 /* Contenedor principal */
