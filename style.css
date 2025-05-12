@@ -107,3 +107,59 @@ footer {
     max-height: 90px;
   }
 }
+/* Slide estilo profesional */
+.pagina-informe {
+  display: none;
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+/* Transiciones */
+.slide-in-right {
+  animation-name: slideInRight;
+}
+.slide-in-left {
+  animation-name: slideInLeft;
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Botones navegación centrados y con espacio */
+#navegacion button {
+  margin: 10px;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#navegacion button:hover {
+  background-color: #2980b9;
+}

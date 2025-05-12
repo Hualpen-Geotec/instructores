@@ -1,3 +1,4 @@
+
 const RESULTADOS_URL = "https://script.google.com/macros/s/AKfycbxzGpfD9KSrarirQrn14A08sNZlq0S7wYhacSPZRWv0eDKVXTpm0l-yh_YBuy-kMfwwhQ/exec";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -122,7 +123,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
+  
   function mostrarInforme(index) {
+    const direccion = index > indexActual ? 'slide-in-right' : 'slide-in-left';
+    informes.forEach((i, idx) => {
+      i.pagina.style.display = idx === index ? "block" : "none";
+      i.pagina.classList.remove("slide-in-right", "slide-in-left");
+    });
+    informes[index].pagina.classList.add(direccion);
+
     informes.forEach((i, idx) => i.pagina.style.display = idx === index ? "block" : "none");
     navegacion.innerHTML = "";
 
