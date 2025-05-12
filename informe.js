@@ -1,4 +1,3 @@
-
 const RESULTADOS_URL = "https://script.google.com/macros/s/AKfycbxzGpfD9KSrarirQrn14A08sNZlq0S7wYhacSPZRWv0eDKVXTpm0l-yh_YBuy-kMfwwhQ/exec";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -6,7 +5,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const selector = document.getElementById("selectorRuts");
 
   try {
-    // Cargar listado de alumnos únicos
     const res = await fetch(`${RESULTADOS_URL}?listado=1`);
     const lista = await res.json();
 
@@ -36,13 +34,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         const registros = await res.json();
         if (registros.length === 0) continue;
 
-        const nombre = registros[0]["Nombre"] || "Alumno";
-        const notas = registros.map(r => Number(r["Nota"]) || 0);
-        const fechas = registros.map(r => new Date(r["Fecha"]));
-        const fechasFormateadas = fechas.map(f => f.toLocaleDateString());
+        const nombre = registros[0]["NOMBRE"] || "Alumno";
+        const notas = registros.map(r => Number(r["NOTA"]) || 0);
+        const fechas = registros.map(r => new Date(r["FECHA"]));
+        const fechasValidas = fechas.filter(f => !isNaN(f));
+        const fechasFormateadas = fechas.map(f => new Date(f).toLocaleDateString());
 
         const columnasErrores = Object.keys(registros[0]).filter(k =>
-          ["EPF", "CGR", "EXTINTORES", "ENERGIAS", "EXP_MINERA", "OP_INV", "REG_INT_TRANS", "REG_CARGIO", "PROC_CONDUC_INT_MINA"].includes(k)
+          ["EPF", "CGR", "EXTINTORES", "ENERGIAS", "EXP_MINERA", "OP_MINA", "OP_INV", "REG_INT_TRANS", "REG_CARGIO", "PROC_CONDUC_INT_MINA", "ESCOLTA", "ACREDITACION"].includes(k)
         );
 
         const erroresTotales = columnasErrores.reduce((acc, col) => {
@@ -55,29 +54,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         div.innerHTML = `
           <h2>${nombre} (${rut})</h2>
           <p><strong>Total de intentos:</strong> ${registros.length}</p>
-          <p><strong>Primera vez:</strong> ${fechas.sort((a, b) => a - b)[0].toLocaleString()}</p>
-          <p><strong>Última vez:</strong> ${fechas.sort((a, b) => b - a)[0].toLocaleString()}</p>
+          <p><strong>Primera vez:</strong> ${fechasValidas[0]?.toLocaleString() || "Fecha no válida"}</p>
+          <p><strong>Última vez:</strong> ${fechasValidas.at(-1)?.toLocaleString() || "Fecha no válida"}</p>
           <p><strong>Nota más baja:</strong> ${Math.min(...notas)}%</p>
           <p><strong>Nota más alta:</strong> ${Math.max(...notas)}%</p>
           <p><strong>Promedio:</strong> ${Math.round(notas.reduce((a, b) => a + b, 0) / notas.length)}%</p>
 
           <canvas id="grafNota${rut}" height="180"></canvas>
           <canvas id="grafErrores${rut}" height="180" style="margin-top: 20px;"></canvas>
-
-          <table border="1" style="width:100%; margin-top: 20px; border-collapse: collapse;">
-            <thead style="background-color:#f2f2f2;">
-              <tr>
-                ${Object.keys(registros[0]).map(k => `<th>${k}</th>`).join("")}
-              </tr>
-            </thead>
-            <tbody>
-              ${registros.map(r => `
-                <tr>
-                  ${Object.values(r).map(v => `<td>${v}</td>`).join("")}
-                </tr>
-              `).join("")}
-            </tbody>
-          </table>
         `;
         contenedor.appendChild(div);
 
