@@ -11,15 +11,21 @@
   <header>
     <img src="Logo_Academia.png" alt="Logo Hualpén Academia" />
   </header>
+
   <main class="container">
-    <h1>Informe del Instructor</h1>
-    <div id="informe">
-      <p>🔄 Cargando información del instructor...</p>
-    </div>
+    <h1>Informe Académico</h1>
+
+    <label for="selectorRuts">Seleccione uno o más alumnos:</label>
+    <select id="selectorRuts" multiple style="width: 100%; margin-bottom: 20px;"></select>
+    <button id="generarInforme">Generar Informe</button>
+
+    <div id="informesContainer"></div>
   </main>
+
   <footer>
     &copy; 2025 Hualpén Academia - Informe generado automáticamente.
   </footer>
+
   <script src="informe.js?v=1.1" defer></script>
 </body>
 </html>
