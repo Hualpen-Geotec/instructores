@@ -7,36 +7,21 @@
   <link rel="stylesheet" href="style.css?v=1.1" />
 </head>
 <body>
-
   <header>
-    <img src="Logo_Academia.png" alt="Logo Hualpén Academia">
+    <img src="Logo_Academia.png" alt="Logo Hualpén Academia" />
   </header>
-
   <main class="container">
     <h1>Ingreso de Instructores</h1>
-
     <form id="loginForm" aria-label="Formulario de ingreso">
       <label for="rut">Ingrese su RUT <small>(sin puntos ni guion)</small>:</label>
-      <input
-        type="text"
-        id="rut"
-        name="rut"
-        placeholder="123456789"
-        maxlength="9"
-        required
-        autocomplete="off"
-        aria-required="true"
-      />
-
+      <input type="text" id="rut" name="rut" placeholder="123456789" maxlength="9" required autocomplete="off" aria-required="true" />
       <button type="submit">Entrar</button>
       <p id="mensaje" class="mensaje-error" role="alert" aria-live="assertive"></p>
     </form>
   </main>
-
   <footer>
     &copy; 2025 Hualpén Academia - Todos los derechos reservados.
   </footer>
-
   <script src="script.js?v=1.1" defer></script>
 </body>
 </html>
